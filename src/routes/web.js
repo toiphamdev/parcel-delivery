@@ -8,7 +8,7 @@ let initWebRoutes = (app)=>{
     
 
     app.get('/', (req, res) => {
-        res.send('Hello World!')
+        res.send('Toouir gì làm khó a!')
     })
 
     app.use('/',router);
