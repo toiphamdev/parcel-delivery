@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const { createJWT } = require('../middleware/JWTAction');
+const _ = require('lodash');
 const db = require('../models');
 const salt = bcrypt.genSaltSync(10);
 
@@ -113,7 +114,41 @@ const handleUserLoginService = (data) => {
   });
 };
 
+const handleUserLogoutService = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!id) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameter',
+        });
+      } else {
+        let res = await db.User.update(
+          {
+            isLogin: false,
+            accessToken: null,
+          },
+          {
+            where: {
+              id: id,
+            },
+          }
+        );
+        if (!_.isEmpty(res)) {
+          resolve({
+            errCode: 0,
+            errMessage: 'User logout success!',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewUserService,
   handleUserLoginService,
+  handleUserLogoutService,
 };

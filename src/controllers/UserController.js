@@ -18,7 +18,17 @@ const handleUserLogin = async (req, res) => {
   }
 };
 
+const handleUserLogout = async (req, res) => {
+  try {
+    let data = await userService.handleUserLogoutService(req.body.id);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createNewUser,
   handleUserLogin,
+  handleUserLogout,
 };
