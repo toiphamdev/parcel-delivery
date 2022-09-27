@@ -20,9 +20,6 @@ module.exports = {
       password: {
         type: Sequelize.TEXT,
       },
-      accessToken: {
-        type: Sequelize.TEXT,
-      },
       isLogin: {
         type: Sequelize.BOOLEAN,
       },
