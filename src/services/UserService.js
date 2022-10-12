@@ -84,7 +84,7 @@ const handleUserLoginService = (data) => {
           );
           if (password) {
             delete user.password;
-            let accessToken = createJWT(user, '48h');
+            let accessToken = createJWT(user.id, '48h');
             await db.User.update(
               {
                 isLogin: true,
@@ -127,7 +127,6 @@ const handleUserLogoutService = (id) => {
         let res = await db.User.update(
           {
             isLogin: false,
-            accessToken: null,
           },
           {
             where: {
@@ -290,7 +289,17 @@ const loginWithOTPService = (OTP) => {
         });
         let date = new Date();
         if (user && user.expiredIn >= date.getTime() / 1000) {
-          let accessToken = createJWT({ ...user.userData }, '48h');
+          let accessToken = createJWT({ ...user.userData.id }, '48h');
+          await db.User.update(
+            {
+              isLogin: true,
+            },
+            {
+              where: {
+                id: user.id,
+              },
+            }
+          );
           resolve({
             errCode: 0,
             errMessage: 'Login success!',
