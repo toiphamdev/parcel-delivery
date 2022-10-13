@@ -9,7 +9,7 @@ const salt = bcrypt.genSaltSync(10);
 const createNewUserService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.phoneNumber && !data.password) {
+      if (!data.email && !data.password) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameter',
@@ -18,7 +18,7 @@ const createNewUserService = (data) => {
         const password = bcrypt.hashSync(data.password, salt);
         let userExist = await db.User.findOne({
           where: {
-            phoneNumber: data.phoneNumber,
+            email: data.email,
           },
         });
         if (userExist) {

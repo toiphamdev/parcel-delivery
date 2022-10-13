@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      senderId: {
+      senderEmail: {
         type: Sequelize.STRING,
       },
       fullName: {
@@ -36,6 +36,15 @@ module.exports = {
         type: Sequelize.STRING,
       },
       receivePlace: {
+        type: Sequelize.STRING,
+      },
+      statusId: {
+        type: Sequelize.STRING,
+      },
+      releaseTime: {
+        type: Sequelize.STRING,
+      },
+      note: {
         type: Sequelize.STRING,
       },
       createdAt: {
