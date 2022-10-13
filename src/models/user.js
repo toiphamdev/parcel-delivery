@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.MailOTP, {
-        foreignKey: 'userId',
+        foreignKey: 'userEmail',
         as: 'userData',
       });
     }
