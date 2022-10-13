@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       MailOTP.belongsTo(models.User, {
-        foreignKey: 'userId',
+        foreignKey: 'userEmail',
         targetKey: 'id',
         as: 'userData',
       });
