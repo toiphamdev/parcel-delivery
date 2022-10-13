@@ -242,7 +242,7 @@ const sendOTP = (email) => {
           const date = Math.floor(Date.now() / 1000) + 7200;
           await db.MailOTP.create({
             OTP: OTP,
-            userId: user.id,
+            userEmail: user.email,
             expiredIn: date,
           });
           await sendSimpleEmail(OTP, email);
@@ -264,10 +264,10 @@ const sendOTP = (email) => {
   });
 };
 
-const loginWithOTPService = (OTP) => {
+const loginWithOTPService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!OTP) {
+      if (!data.OTP) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameter',
@@ -275,7 +275,8 @@ const loginWithOTPService = (OTP) => {
       } else {
         let user = await db.MailOTP.findOne({
           where: {
-            OTP: OTP,
+            OTP: data.OTP,
+            userEmail: data.userEmail,
           },
           include: [
             {

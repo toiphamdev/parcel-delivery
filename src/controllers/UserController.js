@@ -47,7 +47,7 @@ const sendMailOTP = async (req, res) => {
 
 const loginWithOTP = async (req, res) => {
   try {
-    let data = await userService.loginWithOTPService(req.body.OTP);
+    let data = await userService.loginWithOTPService(req.body);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);

@@ -11,7 +11,7 @@ module.exports = {
       OTP: {
         type: Sequelize.STRING,
       },
-      userId: {
+      userEmail: {
         type: Sequelize.INTEGER,
       },
       expiredIn: {
