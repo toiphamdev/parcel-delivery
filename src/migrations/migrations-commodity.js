@@ -20,8 +20,8 @@ module.exports = {
       value: {
         type: Sequelize.STRING,
       },
-      statusId: {
-        type: Sequelize.STRING,
+      weight: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

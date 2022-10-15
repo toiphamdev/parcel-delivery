@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   MailOTP.init(
     {
       OTP: DataTypes.STRING,
-      userEmail: DataTypes.INTEGER,
+      userEmail: DataTypes.STRING,
       expiredIn: DataTypes.STRING,
     },
     {

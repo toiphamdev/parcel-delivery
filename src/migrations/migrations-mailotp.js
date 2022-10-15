@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       userEmail: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       expiredIn: {
         type: Sequelize.STRING,

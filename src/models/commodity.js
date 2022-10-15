@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Commodity.init(
     {
       name: DataTypes.STRING,
-      weight: DataTypes.STRING,
+      weight: DataTypes.INTEGER,
       amount: DataTypes.TEXT,
       value: DataTypes.STRING,
       orderCode: DataTypes.STRING,

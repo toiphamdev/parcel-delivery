@@ -47,6 +47,12 @@ module.exports = {
       note: {
         type: Sequelize.STRING,
       },
+      price: {
+        type: Sequelize.INTEGER,
+      },
+      date: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
