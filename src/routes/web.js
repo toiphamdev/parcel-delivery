@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/UserController');
 const orderController = require('../controllers/OrderController');
 const { accessMidleware } = require('../middleware/JWTMidleware');
+const allcodeController = require('../controllers/AllcodeController');
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -18,7 +19,10 @@ let initWebRoutes = (app) => {
   router.post('/api/login-with-otp', userController.loginWithOTP);
   // order
   router.post('/api/create-order', orderController.createOrder);
+  router.get('/api/get-chart-data', orderController.getChartData);
 
+  //allcode
+  router.get('/api/get-allcode', allcodeController.getAllcode);
   router.get('/', (req, res) => {
     res.send('Toouir gì làm khó a!');
   });
