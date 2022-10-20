@@ -20,6 +20,7 @@ let initWebRoutes = (app) => {
   // order
   router.post('/api/create-order', orderController.createOrder);
   router.get('/api/get-chart-data', orderController.getChartData);
+  router.get('/api/get-order-by-status', orderController.getOrderByStatusId);
 
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);

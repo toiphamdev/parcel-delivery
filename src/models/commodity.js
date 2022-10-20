@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       amount: DataTypes.TEXT,
       value: DataTypes.STRING,
       orderCode: DataTypes.STRING,
+      senderEmail: DataTypes.STRING,
     },
     {
       sequelize,

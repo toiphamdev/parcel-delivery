@@ -1,3 +1,4 @@
+const { size } = require('lodash');
 const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
 
@@ -16,7 +17,7 @@ const createNewOrderService = (data) => {
           errMessage: 'Missing required parameters!',
         });
       } else {
-        let date = new Date().setHours(0, 0, 0, 0);
+        let date = new Date().setHours(0, 0, 0, 0) / 1000;
         let order = await db.Order.create({
           senderId: data.senderEmail,
           fullName: data.fullName,
@@ -226,7 +227,92 @@ const getChartDataService = (data) => {
   });
 };
 
+const getOrderByStatusIdService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.type || !data.page || !data.size) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        switch (data.type) {
+          case 'SENDER':
+            if ((!data.statusId, !data.email, !data.date)) {
+              resolve({
+                errCode: 1,
+                errMessage: 'Missing required parameters!',
+              });
+            } else {
+              let order = await db.Order.findAll({
+                where: {
+                  senderEmail: data.email,
+                  date: data.date,
+                  statusId: data.statusId,
+                },
+                limit: data.size,
+                offset: (data.page - 1) * data.size,
+                nest: true,
+                raw: false,
+              });
+              if (order) {
+                resolve({
+                  errCode: 0,
+                  errMessage: 'success',
+                  data: order,
+                });
+              } else {
+                resolve({
+                  errCode: 2,
+                  errMessage: 'failed',
+                });
+              }
+            }
+            break;
+          case 'RECEIVER':
+            if ((!data.statusId, !data.email, !data.date)) {
+              resolve({
+                errCode: 1,
+                errMessage: 'Missing required parameters!',
+              });
+            } else {
+              let order = await db.Order.findAll({
+                where: {
+                  receiverEmail: data.email,
+                  date: data.date,
+                  statusId: data.statusId,
+                },
+                limit: data.size,
+                offset: (data.page - 1) * data.size,
+                nest: true,
+                raw: false,
+              });
+              if (order) {
+                resolve({
+                  errCode: 0,
+                  errMessage: 'success',
+                  data: order,
+                });
+              } else {
+                resolve({
+                  errCode: 2,
+                  errMessage: 'failed',
+                });
+              }
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewOrderService,
   getChartDataService,
+  getOrderByStatusIdService,
 };
