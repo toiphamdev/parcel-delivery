@@ -19,30 +19,43 @@ const createNewOrderService = (data) => {
         });
       } else {
         let date = new Date().setHours(0, 0, 0, 0) / 1000;
-        let order = await db.Order.create({
-          senderEmail: data.senderEmail,
-          fullName: data.fullName,
-          phoneNumber: data.phoneNumber,
-          address: data.address,
-          date: date,
-          orderCode: data.orderCode,
+        let isExist = await db.Order.findOne({
+          where: {
+            orderCode: data.orderCode,
+            senderEmail: data.senderEmail,
+          },
         });
-        let commodityArr = parseCommodityArr(
-          data.commodities,
-          data.orderCode,
-          data.senderEmail
-        );
-        let commodities = await db.Commodity.bulkCreate(commodityArr);
-        if (order && commodities) {
+        if (isExist) {
           resolve({
-            errCode: 0,
-            errMessage: 'Create order success!',
+            errCode: 3,
+            errMessage: 'Order code is exist',
           });
         } else {
-          resolve({
-            errCode: 2,
-            errMessage: 'Create order failed!',
+          let order = await db.Order.create({
+            senderEmail: data.senderEmail,
+            fullName: data.fullName,
+            phoneNumber: data.phoneNumber,
+            address: data.address,
+            date: date,
+            orderCode: data.orderCode,
           });
+          let commodityArr = parseCommodityArr(
+            data.commodities,
+            data.orderCode,
+            data.senderEmail
+          );
+          let commodities = await db.Commodity.bulkCreate(commodityArr);
+          if (order && commodities) {
+            resolve({
+              errCode: 0,
+              errMessage: 'Create order success!',
+            });
+          } else {
+            resolve({
+              errCode: 2,
+              errMessage: 'Create order failed!',
+            });
+          }
         }
       }
     } catch (error) {
