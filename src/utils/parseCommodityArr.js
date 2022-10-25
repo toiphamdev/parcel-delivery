@@ -7,4 +7,6 @@ const parseCommodityArr = (arr, orderCode) => {
   });
 };
 
-module.exports = parseCommodityArr;
+module.exports = {
+  parseCommodityArr,
+};
