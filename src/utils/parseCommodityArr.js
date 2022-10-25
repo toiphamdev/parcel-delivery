@@ -1,7 +1,8 @@
-const parseCommodityArr = (arr, orderCode) => {
+const parseCommodityArr = (arr, orderCode, senderEmail) => {
   return arr.map((item) => {
     return {
       orderCode: orderCode,
+      senderEmail: senderEmail,
       ...item,
     };
   });

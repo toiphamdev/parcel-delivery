@@ -27,7 +27,11 @@ const createNewOrderService = (data) => {
           date: date,
           orderCode: data.orderCode,
         });
-        let commodityArr = parseCommodityArr(data.commodities, data.orderCode);
+        let commodityArr = parseCommodityArr(
+          data.commodities,
+          data.orderCode,
+          data.senderEmail
+        );
         let commodities = await db.Commodity.bulkCreate(commodityArr);
         if (order && commodities) {
           resolve({
