@@ -19,7 +19,7 @@ const createNewOrderService = (data) => {
       } else {
         let date = new Date().setHours(0, 0, 0, 0) / 1000;
         let order = await db.Order.create({
-          senderId: data.senderEmail,
+          senderEmail: data.senderEmail,
           fullName: data.fullName,
           phoneNumber: data.phoneNumber,
           address: data.address,
@@ -162,6 +162,15 @@ const getChartDataService = (data) => {
               return total + Number(currentItem.collectMoney);
             }, 0),
             price: cancelled.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          took: {
+            length: took.length,
+            collectMoney: took.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: took.reduce((total, currentItem) => {
               return total + Number(currentItem.price);
             }, 0),
           },
