@@ -38,6 +38,7 @@ const createNewOrderService = (data) => {
             address: data.address,
             date: date,
             orderCode: data.orderCode,
+            statusId: 'CREATE',
           });
           let commodityArr = parseCommodityArr(
             data.commodities,
