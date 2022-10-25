@@ -5,6 +5,7 @@ const { parseCommodityArr } = require('../utils/parseCommodityArr');
 const createNewOrderService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      console.log(data);
       if (
         !data.senderEmail ||
         !data.fullName ||
