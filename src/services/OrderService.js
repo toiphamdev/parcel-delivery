@@ -258,7 +258,7 @@ const getChartDataService = (data) => {
 const getOrderByStatusIdService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.type || !data.page || !data.size) {
+      if (!data.type || !data.page || !data.size || !data.date) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameters!',
