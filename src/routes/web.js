@@ -25,7 +25,7 @@ let initWebRoutes = (app) => {
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);
   router.get('/', (req, res) => {
-    res.send('Toouir gì làm khó a!');
+    res.send('To gì làm khó a!');
   });
 
   app.use('/', router);
