@@ -5,7 +5,6 @@ const { parseCommodityArr } = require('../utils/parseCommodityArr');
 const createNewOrderService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(data);
       if (
         !data.senderEmail ||
         !data.fullName ||
@@ -257,7 +256,6 @@ const getChartDataService = (data) => {
 
 const getOrderByStatusIdService = (data) => {
   return new Promise(async (resolve, reject) => {
-    console.log(data);
     try {
       if (
         !data.type ||
@@ -279,14 +277,16 @@ const getOrderByStatusIdService = (data) => {
                 errMessage: 'Missing required parameters!',
               });
             } else {
-              let order = await db.Order.findAll({
+              const page = +data.page;
+              const size = +data.size;
+              let order = await db.Order.findAndCountAll({
                 where: {
                   senderEmail: data.email,
                   date: data.date,
                   statusId: data.statusId,
                 },
-                limit: data.size,
-                offset: (data.page - 1) * data.size,
+                limit: size,
+                offset: (page - 1) * size,
                 nest: true,
                 raw: false,
               });
