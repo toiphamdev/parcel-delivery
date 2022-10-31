@@ -346,8 +346,101 @@ const getOrderByStatusIdService = (data) => {
   });
 };
 
+const getOrderByStatusService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.type ||
+        !data.page ||
+        !data.size ||
+        !data.date ||
+        !data.statusId
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        const page = +data.page;
+        const size = +data.size;
+        let order = await db.Order.findAndCountAll({
+          where: {
+            date: data.date,
+            statusId: data.statusId,
+          },
+          limit: size,
+          offset: (page - 1) * size,
+          nest: true,
+          raw: false,
+        });
+        if (order) {
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+            data: order,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const updateOrderStatusService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.id || !data.statusId || !data.verifierEmail) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let order = await db.Order.update(
+          {
+            statusId: data.statusId,
+          },
+          {
+            where: {
+              id: data.id,
+            },
+          }
+        );
+        if (order) {
+          let date = new Date().setHours(0, 0, 0, 0) / 1000;
+          await db.DetailStatus.create({
+            orderId: data.id,
+            statusId: data.statusId,
+            date: date,
+            senderEmail: data.senderEmail,
+            orderCode: data.orderCode,
+          });
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: failed,
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewOrderService,
   getChartDataService,
   getOrderByStatusIdService,
+  getOrderByStatusService,
+  updateOrderStatusService,
 };
