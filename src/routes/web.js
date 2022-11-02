@@ -21,7 +21,11 @@ let initWebRoutes = (app) => {
   router.post('/api/create-order', orderController.createOrder);
   router.get('/api/get-chart-data', orderController.getChartData);
   router.get('/api/get-order-by-status', orderController.getOrderByStatusId);
-  router.get('/api/get-order-admin', orderController.getOrderByStatus);
+  router.get('/api/get-order', orderController.getOrderByStatus);
+  router.get(
+    '/api/get-order-postman',
+    orderController.getOrderPostmanByStatusId
+  );
   router.post('/api/update-order-status', orderController.updateOrderStatus);
 
   //allcode

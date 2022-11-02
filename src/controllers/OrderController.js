@@ -80,10 +80,27 @@ const updateOrderStatus = async (req, res) => {
   }
 };
 
+const getOrderPostmanByStatusId = async (req, res) => {
+  try {
+    const data = await OrderService.getOrderPostmanByStatusIdService(req.query);
+    if (!data) {
+      return res.status(200).json({
+        errCode: -1,
+        errMessage: 'Err from server',
+      });
+    } else {
+      return res.status(200).json(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createOrder,
   getChartData,
   getOrderByStatusId,
   getOrderByStatus,
   updateOrderStatus,
+  getOrderPostmanByStatusId,
 };
