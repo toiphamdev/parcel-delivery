@@ -420,6 +420,16 @@ const updateOrderStatusService = (data) => {
             senderEmail: data.senderEmail,
             orderCode: data.orderCode,
           });
+          await db.Order.update(
+            {
+              postmanEmail: data.verifierEmail,
+            },
+            {
+              where: {
+                id: data.id,
+              },
+            }
+          );
           resolve({
             errCode: 0,
             errMessage: 'success',
