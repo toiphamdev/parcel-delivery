@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       date: DataTypes.STRING,
       receiverEmail: DataTypes.STRING,
       postmanEmail: DataTypes.STRING,
+      storageId: DataTypes.STRING,
     },
     {
       sequelize,
