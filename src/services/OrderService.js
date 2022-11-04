@@ -441,7 +441,7 @@ const updateOrderStatusService = (data) => {
   });
 };
 
-const getOrderPostmanByStatusIdService = () => {
+const getOrderPostmanByStatusIdService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       if (
