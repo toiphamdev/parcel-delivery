@@ -445,12 +445,11 @@ const getOrderPostmanByStatusIdService = () => {
   return new Promise(async (resolve, reject) => {
     try {
       if (
-        !data.type ||
         !data.page ||
         !data.size ||
         !data.date ||
         !data.statusId ||
-        !data.email
+        !data.postmanEmail
       ) {
         resolve({
           errCode: 1,
