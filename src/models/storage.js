@@ -9,11 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Storage.belongsTo(models.User, {
-        foreignKey: 'userEmail',
-        targetKey: 'email',
-        as: 'userData',
-      });
     }
   }
   Storage.init(

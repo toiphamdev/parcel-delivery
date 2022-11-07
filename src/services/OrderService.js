@@ -488,6 +488,82 @@ const getOrderPostmanByStatusIdService = (data) => {
   });
 };
 
+const orderStorageTranferService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.storageId || !data.id) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing requrired parameter!',
+        });
+      } else {
+        const order = db.Order.update(
+          {
+            storageId: data.storageId,
+          },
+          {
+            where: {
+              id: data.id,
+            },
+          }
+        );
+        if (order) {
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const getOrderByStorageIdService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.page || !data.size || !data.storageId) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        const page = +data.page;
+        const size = +data.size;
+        let order = await db.Order.findAndCountAll({
+          where: {
+            storageId: data.storageId,
+          },
+          limit: size,
+          offset: (page - 1) * size,
+          nest: true,
+          raw: false,
+        });
+        if (order) {
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+            data: order,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewOrderService,
   getChartDataService,
@@ -495,4 +571,6 @@ module.exports = {
   getOrderByStatusService,
   updateOrderStatusService,
   getOrderPostmanByStatusIdService,
+  orderStorageTranferService,
+  getOrderByStorageIdService,
 };

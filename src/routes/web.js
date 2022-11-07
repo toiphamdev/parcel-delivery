@@ -3,6 +3,7 @@ const userController = require('../controllers/UserController');
 const orderController = require('../controllers/OrderController');
 const { accessMidleware } = require('../middleware/JWTMidleware');
 const allcodeController = require('../controllers/AllcodeController');
+const storageController = require('../controllers/StorageController');
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -14,6 +15,8 @@ let initWebRoutes = (app) => {
     accessMidleware,
     userController.updateUserInfo
   );
+
+  router.get('/api/get-user-by-id', userController.getUserById);
 
   router.post('/api/send-otp', userController.sendMailOTP);
   router.post('/api/login-with-otp', userController.loginWithOTP);
@@ -27,12 +30,20 @@ let initWebRoutes = (app) => {
     orderController.getOrderPostmanByStatusId
   );
   router.post('/api/update-order-status', orderController.updateOrderStatus);
+  router.post(
+    '/api/order-storage-tranfer',
+    orderController.orderStorageTranfer
+  );
+  router.get('/api/get-order-by-storage', orderController.getOrderByStorageId);
 
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);
   router.get('/', (req, res) => {
     res.send('To gì làm khó a!');
   });
+
+  //storage
+  router.get('/api/get-all-storage', storageController.getAllStorages);
 
   app.use('/', router);
 };

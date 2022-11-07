@@ -216,6 +216,11 @@ const getUserByIdService = (id) => {
             errMessage: 'Find user success',
             data: user,
           });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'Find user success',
+          });
         }
       }
     } catch (error) {
@@ -329,4 +334,5 @@ module.exports = {
   getUserByIdService,
   sendOTP,
   loginWithOTPService,
+  getUserByIdService,
 };

@@ -96,6 +96,38 @@ const getOrderPostmanByStatusId = async (req, res) => {
   }
 };
 
+const orderStorageTranfer = async (req, res) => {
+  try {
+    const data = await OrderService.orderStorageTranferService(req.body);
+    if (!data) {
+      return res.status(200).json({
+        errCode: -1,
+        errMessage: 'Err from server',
+      });
+    } else {
+      return res.status(200).json(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getOrderByStorageId = async (req, res) => {
+  try {
+    const data = await OrderService.getOrderByStorageIdService(req.query);
+    if (!data) {
+      return res.status(200).json({
+        errCode: -1,
+        errMessage: 'Err from server',
+      });
+    } else {
+      return res.status(200).json(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createOrder,
   getChartData,
@@ -103,4 +135,6 @@ module.exports = {
   getOrderByStatus,
   updateOrderStatus,
   getOrderPostmanByStatusId,
+  orderStorageTranfer,
+  getOrderByStorageId,
 };
