@@ -539,6 +539,7 @@ const getOrderByStorageIdService = (data) => {
         let order = await db.Order.findAndCountAll({
           where: {
             storageId: data.storageId,
+            statusId: 'STORAGE',
           },
           limit: size,
           offset: (page - 1) * size,

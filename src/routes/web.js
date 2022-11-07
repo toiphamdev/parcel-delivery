@@ -39,7 +39,7 @@ let initWebRoutes = (app) => {
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);
   router.get('/', (req, res) => {
-    res.send('To gì làm khó a!');
+    res.send('a!');
   });
 
   //storage
