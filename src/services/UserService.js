@@ -37,7 +37,7 @@ const createNewUserService = (data) => {
             permanentAddress: data.permanentAddress,
             address: data.address,
             service: data.service,
-            roleId: 'R3',
+            roleId: 'R4',
           });
           resolve({
             errCode: 0,

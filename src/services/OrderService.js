@@ -67,7 +67,7 @@ const createNewOrderService = (data) => {
 const getChartDataService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.senderEmail) {
+      if (!data.senderEmail && !data.date) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameter',
@@ -77,12 +77,14 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'TRANSPORT',
+            date: data.date,
           },
         });
         let handling = await db.Order.findAll({
           where: {
             senderEmail: data.senderEmail,
             statusId: 'HANDLING',
+            date: data.date,
           },
         });
 
@@ -90,12 +92,14 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'DELIVERY',
+            date: data.date,
           },
         });
         let successDelivery = await db.Order.findAll({
           where: {
             senderEmail: data.senderEmail,
             statusId: 'SUCCESSFUL_DELIVERY',
+            date: data.date,
           },
         });
 
@@ -103,6 +107,7 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'WAIT',
+            date: data.date,
           },
         });
 
@@ -110,6 +115,7 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'FURTHER_TRANSFER',
+            date: data.date,
           },
         });
 
@@ -117,6 +123,7 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'REFUND_APPROVED',
+            date: data.date,
           },
         });
 
@@ -124,6 +131,7 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'CONTINUE',
+            date: data.date,
           },
         });
 
@@ -131,6 +139,7 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'CREATE',
+            date: data.date,
           },
         });
 
@@ -138,12 +147,14 @@ const getChartDataService = (data) => {
           where: {
             senderEmail: data.senderEmail,
             statusId: 'TOOK',
+            date: data.date,
           },
         });
         let cancelled = await db.Order.findAll({
           where: {
             senderEmail: data.senderEmail,
             statusId: 'CANCELLED',
+            date: data.date,
           },
         });
         resolve({
@@ -389,7 +400,13 @@ const getOrderByStatusService = (data) => {
 const updateOrderStatusService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.id || !data.statusId || !data.verifierEmail) {
+      if (
+        !data.id ||
+        !data.statusId ||
+        !data.verifierEmail ||
+        !data.collectMoney ||
+        !data.price
+      ) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameters',
@@ -398,6 +415,7 @@ const updateOrderStatusService = (data) => {
         let order = await db.Order.update(
           {
             statusId: data.statusId,
+            postmanEmail: data.verifierEmail,
           },
           {
             where: {
@@ -413,17 +431,10 @@ const updateOrderStatusService = (data) => {
             date: date,
             senderEmail: data.senderEmail,
             orderCode: data.orderCode,
+            verifierEmail: data.verifierEmail,
+            collectMoney: data.collectMoney,
+            price: data.price,
           });
-          await db.Order.update(
-            {
-              postmanEmail: data.verifierEmail,
-            },
-            {
-              where: {
-                id: data.id,
-              },
-            }
-          );
           resolve({
             errCode: 0,
             errMessage: 'success',

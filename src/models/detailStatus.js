@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       statusId: DataTypes.STRING,
       verifierEmail: DataTypes.STRING,
       date: DataTypes.STRING,
+      collectMoney: DataTypes.STRING,
+      price: DataTypes.STRING,
     },
     {
       sequelize,
