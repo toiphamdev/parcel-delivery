@@ -56,7 +56,16 @@ const loginWithOTP = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    let data = await userService.getUserByIdService(req.body);
+    let data = await userService.getUserByIdService(req.query);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getUserByRoleId = async (req, res) => {
+  try {
+    let data = await userService.getUserByRoleIdService(req.query);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
@@ -71,4 +80,5 @@ module.exports = {
   sendMailOTP,
   loginWithOTP,
   getUserById,
+  getUserByRoleId,
 };

@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.TEXT,
       service: DataTypes.STRING,
       roleId: DataTypes.STRING,
+      storageId: DataTypes.STRING,
     },
     {
       sequelize,

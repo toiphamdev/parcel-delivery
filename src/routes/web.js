@@ -16,6 +16,7 @@ let initWebRoutes = (app) => {
     accessMidleware,
     userController.updateUserInfo
   );
+  router.get('/api/get-user-by-role', userController.getUserByRoleId);
 
   router.get('/api/get-user-by-id', userController.getUserById);
 

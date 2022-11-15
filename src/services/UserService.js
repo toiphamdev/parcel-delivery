@@ -326,6 +326,45 @@ const loginWithOTPService = (data) => {
   });
 };
 
+const getUserByRoleIdService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.roleId || !data.page || !data.size) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameter',
+        });
+      } else {
+        const page = +data.page;
+        const size = +data.size;
+        let user = await db.User.findAndCountAll({
+          where: {
+            roleId: data.roleId,
+          },
+          limit: size,
+          offset: (page - 1) * size,
+          nest: true,
+          raw: false,
+        });
+        if (user) {
+          resolve({
+            errCode: 0,
+            errMessage: 'Find user success',
+            data: user,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'Find user success',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewUserService,
   handleUserLoginService,
@@ -335,4 +374,5 @@ module.exports = {
   sendOTP,
   loginWithOTPService,
   getUserByIdService,
+  getUserByRoleIdService,
 };

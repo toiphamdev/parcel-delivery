@@ -511,6 +511,7 @@ const orderStorageTranferService = (data) => {
         const order = db.Order.update(
           {
             storageId: data.storageId,
+            statusId: 'TRANSPORT',
           },
           {
             where: {
