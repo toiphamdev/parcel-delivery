@@ -3,7 +3,7 @@ const db = require('../models');
 const getChartDataPostmanService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.verifierEmail && !data.date) {
+      if (!data.verifierEmail || !data.date) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameter',

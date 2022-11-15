@@ -1,4 +1,3 @@
-const { size } = require('lodash');
 const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
 
@@ -17,7 +16,7 @@ const createNewOrderService = (data) => {
           errMessage: 'Missing required parameters!',
         });
       } else {
-        let date = new Date().setHours(0, 0, 0, 0) / 1000;
+        let date = new Date().setHours(0, 0, 0, 0) / 1000 - 7 * 3600;
         let isExist = await db.Order.findOne({
           where: {
             orderCode: data.orderCode,
