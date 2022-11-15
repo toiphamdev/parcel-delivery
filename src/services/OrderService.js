@@ -424,8 +424,7 @@ const updateOrderStatusService = (data) => {
           }
         );
         if (order) {
-          let date = new Date().setHours(0, 0, 0, 0) / 1000;
-          console.log(date);
+          let date = new Date().setHours(0, 0, 0, 0) / 1000 - 7 * 3600;
           await db.DetailStatus.create({
             orderId: data.id,
             statusId: data.statusId,
