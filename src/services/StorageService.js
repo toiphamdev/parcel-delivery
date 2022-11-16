@@ -42,4 +42,34 @@ const createNewStorageService = (data) => {
   });
 };
 
-module.exports = { getAllStorageService, createNewStorageService };
+const getDetailStorageService = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let data = await db.Storage.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (data) {
+        resolve({
+          errCode: 0,
+          errMessage: 'get storage success!',
+          data: data,
+        });
+      } else {
+        resolve({
+          errCode: 2,
+          errMessage: 'Get storage failed!',
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+module.exports = {
+  getAllStorageService,
+  createNewStorageService,
+  getDetailStorageService,
+};

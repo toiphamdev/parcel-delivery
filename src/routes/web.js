@@ -46,6 +46,7 @@ let initWebRoutes = (app) => {
 
   //storage
   router.get('/api/get-all-storage', storageController.getAllStorages);
+  router.get('/api/get-detail-storage', storageController.getDetailStorage);
 
   //detail status
   router.get(
