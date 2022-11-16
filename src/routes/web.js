@@ -33,7 +33,7 @@ let initWebRoutes = (app) => {
   );
   router.post('/api/update-order-status', orderController.updateOrderStatus);
   router.post(
-    '/api/order-storage-tranfer',
+    '/api/order-storage-transfer',
     orderController.orderStorageTranfer
   );
   router.get('/api/get-order-by-storage', orderController.getOrderByStorageId);
