@@ -365,6 +365,45 @@ const getUserByRoleIdService = (data) => {
   });
 };
 
+const changeRoleUserService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.id || !data.roleId) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        let storageId = data.roleId === 'R2' ? data.storageId : null;
+        let res = await db.User.update(
+          {
+            roleId: data.roleId,
+            storageId: storageId,
+          },
+          {
+            where: {
+              id: data.id,
+            },
+          }
+        );
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'change role success!',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'change role failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewUserService,
   handleUserLoginService,
@@ -375,4 +414,5 @@ module.exports = {
   loginWithOTPService,
   getUserByIdService,
   getUserByRoleIdService,
+  changeRoleUserService,
 };

@@ -22,6 +22,7 @@ let initWebRoutes = (app) => {
 
   router.post('/api/send-otp', userController.sendMailOTP);
   router.post('/api/login-with-otp', userController.loginWithOTP);
+  router.post('/api/change-role-user', userController.changeRoleUser);
   // order
   router.post('/api/create-order', orderController.createOrder);
   router.get('/api/get-chart-data', orderController.getChartData);

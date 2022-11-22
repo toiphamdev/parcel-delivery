@@ -72,6 +72,15 @@ const getUserByRoleId = async (req, res) => {
   }
 };
 
+const changeRoleUser = async (req, res) => {
+  try {
+    let data = await userService.changeRoleUserService(req.body);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createNewUser,
   handleUserLogin,
@@ -81,4 +90,5 @@ module.exports = {
   loginWithOTP,
   getUserById,
   getUserByRoleId,
+  changeRoleUser,
 };
