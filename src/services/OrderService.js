@@ -412,10 +412,12 @@ const updateOrderStatusService = (data) => {
           errMessage: 'Missing required parameters',
         });
       } else {
+        let storageId = data.storageId ? data.storageId : null;
         let order = await db.Order.update(
           {
             statusId: data.statusId,
             postmanEmail: data.verifierEmail,
+            storageId: storageId,
           },
           {
             where: {
