@@ -42,6 +42,11 @@ let initWebRoutes = (app) => {
     orderController.searchOrderByPostman
   );
 
+  router.get(
+    '/api/search-order-by-storage',
+    orderController.searchOrderByStorage
+  );
+
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);
   router.get('/', (req, res) => {

@@ -726,4 +726,5 @@ module.exports = {
   getOrderByStorageIdService,
   searchOrderByPostmanService,
   getOrderByStatusIdSorageService,
+  searchOrderByStorageService,
 };
