@@ -37,6 +37,10 @@ let initWebRoutes = (app) => {
     orderController.orderStorageTranfer
   );
   router.get('/api/get-order-by-storage', orderController.getOrderByStorageId);
+  router.get(
+    '/api/search-order-by-postman',
+    orderController.searchOrderByPostman
+  );
 
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);

@@ -1,5 +1,7 @@
 const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const createNewOrderService = (data) => {
   return new Promise(async (resolve, reject) => {
@@ -369,7 +371,6 @@ const getOrderByStatusService = (data) => {
         const size = +data.size;
         let order = await db.Order.findAndCountAll({
           where: {
-            date: data.date,
             statusId: data.statusId,
           },
           limit: size,
@@ -576,6 +577,142 @@ const getOrderByStorageIdService = (data) => {
   });
 };
 
+const searchOrderByPostmanService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.word ||
+        !data.statusId ||
+        !data.postmanEmail ||
+        !data.page ||
+        !data.size
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        let page = +data.page;
+        let size = +data.size;
+        let order = await db.Order.findAndCountAll({
+          where: {
+            [Op.and]: {
+              postmanEmail: data.postmanEmail,
+              statusId: data.statusId,
+              [Op.or]: {
+                senderEmail: data.word,
+                orderCode: data.word,
+              },
+            },
+          },
+          limit: size,
+          offset: (page - 1) * size,
+          nest: true,
+          raw: false,
+        });
+        if (order) {
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+            data: order,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const bulkCreateOrderService = () => {};
+
+const searchOrderByStorageService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.word || !data.statusId || !data.page || !data.size) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        let page = +data.page;
+        let size = +data.size;
+        let order = await db.Order.findAndCountAll({
+          where: {
+            [Op.and]: {
+              statusId: data.statusId,
+              [Op.or]: {
+                senderEmail: data.word,
+                orderCode: data.word,
+              },
+            },
+          },
+          limit: size,
+          offset: (page - 1) * size,
+          nest: true,
+          raw: false,
+        });
+        if (order) {
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+            data: order,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const getOrderByStatusIdSorageService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.type || !data.page || !data.size || !data.statusId) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters!',
+        });
+      } else {
+        let order = await db.Order.findAndCountAll({
+          where: {
+            statusId: data.statusId,
+          },
+          limit: size,
+          offset: (page - 1) * size,
+          nest: true,
+          raw: false,
+        });
+        if (order) {
+          resolve({
+            errCode: 0,
+            errMessage: 'success',
+            data: order,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewOrderService,
   getChartDataService,
@@ -585,4 +722,6 @@ module.exports = {
   getOrderPostmanByStatusIdService,
   orderStorageTranferService,
   getOrderByStorageIdService,
+  searchOrderByPostmanService,
+  getOrderByStatusIdSorageService,
 };
