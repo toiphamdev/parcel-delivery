@@ -361,7 +361,7 @@ const getOrderByStatusIdService = (data) => {
 const getOrderByStatusService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.page || !data.size || !data.date || !data.statusId) {
+      if (!data.page || !data.size || !data.statusId) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameters!',
