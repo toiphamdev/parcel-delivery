@@ -641,7 +641,7 @@ const bulkCreateOrderService = (data) => {
         });
       } else {
         let order = await db.Order.bulkCreate(data.orderArr);
-        let commodity = await db.Order.bulkCreate(data.commodityArr);
+        let commodity = await db.Commodity.bulkCreate(data.commodityArr);
         if (order && commodity) {
           resolve({
             errCode: 0,
@@ -742,6 +742,196 @@ const getOrderByStatusIdSorageService = (data) => {
   });
 };
 
+const getChartDataAdminService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.date) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameter',
+        });
+      } else {
+        let transporting = await db.Order.findAll({
+          where: {
+            statusId: 'TRANSPORT',
+            date: data.date,
+          },
+        });
+        let handling = await db.Order.findAll({
+          where: {
+            statusId: 'HANDLING',
+            date: data.date,
+          },
+        });
+
+        let delivery = await db.Order.findAll({
+          where: {
+            statusId: 'DELIVERY',
+            date: data.date,
+          },
+        });
+        let successDelivery = await db.Order.findAll({
+          where: {
+            statusId: 'SUCCESSFUL_DELIVERY',
+            date: data.date,
+          },
+        });
+
+        let wait = await db.Order.findAll({
+          where: {
+            statusId: 'WAIT',
+            date: data.date,
+          },
+        });
+
+        let furtherTransfer = await db.Order.findAll({
+          where: {
+            statusId: 'FURTHER_TRANSFER',
+            date: data.date,
+          },
+        });
+
+        let refundApproved = await db.Order.findAll({
+          where: {
+            statusId: 'REFUND_APPROVED',
+            date: data.date,
+          },
+        });
+
+        let continu = await db.Order.findAll({
+          where: {
+            statusId: 'CONTINUE',
+            date: data.date,
+          },
+        });
+
+        let create = await db.Order.findAll({
+          where: {
+            statusId: 'CREATE',
+            date: data.date,
+          },
+        });
+
+        let took = await db.Order.findAll({
+          where: {
+            statusId: 'TOOK',
+            date: data.date,
+          },
+        });
+        let cancelled = await db.Order.findAll({
+          where: {
+            statusId: 'CANCELLED',
+            date: data.date,
+          },
+        });
+        resolve({
+          transporting: {
+            length: transporting.length,
+            collectMoney: transporting.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: transporting.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          handling: {
+            length: handling.length,
+            collectMoney: handling.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: handling.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          delivery: {
+            length: delivery.length,
+            collectMoney: delivery.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: delivery.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          cancelled: {
+            length: cancelled.length,
+            collectMoney: cancelled.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: cancelled.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          took: {
+            length: took.length,
+            collectMoney: took.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: took.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          create: {
+            length: create.length,
+            collectMoney: create.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: create.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          continu: {
+            length: continu.length,
+            collectMoney: continu.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: continu.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          successDelivery: {
+            length: successDelivery.length,
+            collectMoney: successDelivery.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: successDelivery.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          wait: {
+            length: wait.length,
+            collectMoney: wait.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: wait.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          furtherTransfer: {
+            length: furtherTransfer.length,
+            collectMoney: furtherTransfer.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: furtherTransfer.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+          refundApproved: {
+            length: refundApproved.length,
+            collectMoney: refundApproved.reduce((total, currentItem) => {
+              return total + Number(currentItem.collectMoney);
+            }, 0),
+            price: refundApproved.reduce((total, currentItem) => {
+              return total + Number(currentItem.price);
+            }, 0),
+          },
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewOrderService,
   getChartDataService,
@@ -755,4 +945,5 @@ module.exports = {
   getOrderByStatusIdSorageService,
   searchOrderByStorageService,
   bulkCreateOrderService,
+  getChartDataAdminService,
 };
