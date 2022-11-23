@@ -947,6 +947,7 @@ const getCommodityService = (data) => {
             orderCode: data.orderCode,
           },
         });
+        console.log(res, data);
         if (res) {
           resolve({
             errCode: 0,
