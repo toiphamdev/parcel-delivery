@@ -18,7 +18,7 @@ let initWebRoutes = (app) => {
   );
   router.get('/api/get-user-by-role', userController.getUserByRoleId);
 
-  router.get('/api/get-user-by-id', userController.getUserById);
+  router.get('/api/get-user-by-email', userController.getUserById);
 
   router.post('/api/send-otp', userController.sendMailOTP);
   router.post('/api/login-with-otp', userController.loginWithOTP);
@@ -44,7 +44,7 @@ let initWebRoutes = (app) => {
   );
 
   router.post('/api/bulk-create-order', orderController.bulkCreateOrder);
-  router.get('/api/get-comodity', orderController.getCommodity);
+  router.get('/api/get-commodity', orderController.getCommodity);
 
   router.get(
     '/api/search-order-by-storage',

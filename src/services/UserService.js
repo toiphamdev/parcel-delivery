@@ -196,10 +196,10 @@ const updateUserInfoService = (data) => {
   });
 };
 
-const getUserByIdService = (id) => {
+const getUserByIdService = (email) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!id) {
+      if (!email) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameter',
@@ -207,7 +207,7 @@ const getUserByIdService = (id) => {
       } else {
         let user = await db.User.findOne({
           where: {
-            id: id,
+            email: email,
           },
         });
         if (user) {
