@@ -44,6 +44,7 @@ let initWebRoutes = (app) => {
   );
 
   router.post('/api/bulk-create-order', orderController.bulkCreateOrder);
+  router.get('/api/get-comodity', orderController.getCommodity);
 
   router.get(
     '/api/search-order-by-storage',

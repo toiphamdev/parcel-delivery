@@ -932,6 +932,40 @@ const getChartDataAdminService = (data) => {
   });
 };
 
+const getCommodityService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.senderEmail || !data.orderCode) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameter!',
+        });
+      } else {
+        let res = db.Commodity.findAll({
+          where: {
+            senderEmail: data.senderEmail,
+            orderCode: data.orderCode,
+          },
+        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'get success',
+            data: res,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'get failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   createNewOrderService,
   getChartDataService,
@@ -946,4 +980,5 @@ module.exports = {
   searchOrderByStorageService,
   bulkCreateOrderService,
   getChartDataAdminService,
+  getCommodityService,
 };
