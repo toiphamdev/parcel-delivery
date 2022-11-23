@@ -941,13 +941,12 @@ const getCommodityService = (data) => {
           errMessage: 'Missing required parameter!',
         });
       } else {
-        let res = db.Commodity.findAll({
+        let res = await db.Commodity.findAll({
           where: {
             senderEmail: data.senderEmail,
             orderCode: data.orderCode,
           },
         });
-        console.log(res, data);
         if (res) {
           resolve({
             errCode: 0,
