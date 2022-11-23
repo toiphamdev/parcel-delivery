@@ -631,7 +631,34 @@ const searchOrderByPostmanService = (data) => {
   });
 };
 
-const bulkCreateOrderService = () => {};
+const bulkCreateOrderService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.orderArr || !data.commodityArr) {
+        resolve({
+          errCode: 0,
+          errMessage: 'Mising required parameters',
+        });
+      } else {
+        let order = await db.Order.bulkCreate(data.orderArr);
+        let commodity = await db.Order.bulkCreate(data.commodityArr);
+        if (order && commodity) {
+          resolve({
+            errCode: 0,
+            errMessage: 'create success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'create failed',
+          });
+        }
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 
 const searchOrderByStorageService = (data) => {
   return new Promise(async (resolve, reject) => {
@@ -727,4 +754,5 @@ module.exports = {
   searchOrderByPostmanService,
   getOrderByStatusIdSorageService,
   searchOrderByStorageService,
+  bulkCreateOrderService,
 };

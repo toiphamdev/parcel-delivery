@@ -43,6 +43,8 @@ let initWebRoutes = (app) => {
     orderController.searchOrderByPostman
   );
 
+  router.post('/api/bulk-create-order', orderController.bulkCreateOrder);
+
   router.get(
     '/api/search-order-by-storage',
     orderController.searchOrderByStorage
