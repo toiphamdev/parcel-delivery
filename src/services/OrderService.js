@@ -459,13 +459,7 @@ const updateOrderStatusService = (data) => {
 const getOrderPostmanByStatusIdService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (
-        !data.page ||
-        !data.size ||
-        !data.date ||
-        !data.statusId ||
-        !data.postmanEmail
-      ) {
+      if (!data.page || !data.size || !data.statusId || !data.postmanEmail) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameters!',
@@ -475,7 +469,6 @@ const getOrderPostmanByStatusIdService = (data) => {
         const size = +data.size;
         let order = await db.Order.findAndCountAll({
           where: {
-            date: data.date,
             statusId: data.statusId,
             postmanEmail: data.postmanEmail,
           },
