@@ -50,6 +50,7 @@ let initWebRoutes = (app) => {
     '/api/search-order-by-storage',
     orderController.searchOrderByStorage
   );
+  router.get('/api/get-chart-data-admin', orderController.getChartDataAdmin);
 
   //allcode
   router.get('/api/get-allcode', allcodeController.getAllcode);

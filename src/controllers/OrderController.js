@@ -176,6 +176,22 @@ const bulkCreateOrder = async (req, res) => {
   }
 };
 
+const getChartDataAdmin = async (req, res) => {
+  try {
+    const data = await OrderService.getChartDataAdminService(req.query);
+    if (!data) {
+      return res.status(200).json({
+        errCode: -1,
+        errMessage: 'Err from server',
+      });
+    } else {
+      return res.status(200).json(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getCommodity = async (req, res) => {
   try {
     const data = await OrderService.getCommodityService(req.query);
@@ -205,4 +221,5 @@ module.exports = {
   searchOrderByStorage,
   bulkCreateOrder,
   getCommodity,
+  getChartDataAdmin,
 };
