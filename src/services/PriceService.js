@@ -3,7 +3,7 @@ const db = require('../models');
 const getProvinceService = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      let res = db.Province.findAll();
+      let res = await db.Province.findAll();
       if (res) {
         resolve({
           errCode: 0,
@@ -31,7 +31,7 @@ const getDistrictService = (data) => {
           errMessage: 'Missing required parameters!',
         });
       } else {
-        let res = db.District.findAll({
+        let res = await db.District.findAll({
           where: {
             provinceId: data.provinceId,
           },
@@ -64,7 +64,7 @@ const getWardService = (data) => {
           errMessage: 'Missing required parameters!',
         });
       } else {
-        let res = db.District.findAll({
+        let res = await db.District.findAll({
           where: {
             districtId: data.districtId,
           },
