@@ -5,6 +5,7 @@ const { accessMidleware } = require('../middleware/JWTMidleware');
 const allcodeController = require('../controllers/AllcodeController');
 const storageController = require('../controllers/StorageController');
 const detailStatusController = require('../controllers/DetailStausController');
+const priceController = require('../controllers/PriceController');
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -67,6 +68,10 @@ let initWebRoutes = (app) => {
     '/api/get-chart-data-postman',
     detailStatusController.getChartDataPostman
   );
+  //price
+  router.get('/api/get-province', priceController.getProvince);
+  router.get('/api/get-district', priceController.getDistrict);
+  router.get('/api/get-province', priceController.getWard);
 
   app.use('/', router);
 };
