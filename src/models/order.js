@@ -31,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       receiverEmail: DataTypes.STRING,
       postmanEmail: DataTypes.STRING,
       storageId: DataTypes.STRING,
+      provinceId: DataTypes.STRING,
+      districtId: DataTypes.STRING,
+      wardId: DataTypes.STRING,
     },
     {
       sequelize,

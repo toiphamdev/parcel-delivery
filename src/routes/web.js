@@ -71,7 +71,7 @@ let initWebRoutes = (app) => {
   //price
   router.get('/api/get-province', priceController.getProvince);
   router.get('/api/get-district', priceController.getDistrict);
-  router.get('/api/get-province', priceController.getWard);
+  router.get('/api/get-ward', priceController.getWard);
 
   app.use('/', router);
 };
