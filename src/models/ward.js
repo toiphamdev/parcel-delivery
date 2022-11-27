@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Ward.init(
     {
       wardName: DataTypes.TEXT,
-      WardId: DataTypes.TEXT,
+      districtId: DataTypes.TEXT,
     },
     {
       sequelize,
