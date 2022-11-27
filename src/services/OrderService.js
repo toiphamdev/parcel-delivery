@@ -41,6 +41,9 @@ const createNewOrderService = (data) => {
             statusId: 'CREATE',
             collectMoney: data.collectMoney,
             price: data.price,
+            districtId: data.districtId,
+            provinceId: data.provinceId,
+            wardId: data.wardId,
           });
           let commodityArr = parseCommodityArr(
             data.commodities,
