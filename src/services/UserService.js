@@ -171,6 +171,9 @@ const updateUserInfoService = (data) => {
             permanentAddress: data.permanentAddress,
             address: data.address,
             service: data.service,
+            provinceId: data.provinceId,
+            districtId: data.districtId,
+            wardId: data.wardId,
           },
           {
             where: {

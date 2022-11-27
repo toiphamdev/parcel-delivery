@@ -64,7 +64,7 @@ const getWardService = (data) => {
           errMessage: 'Missing required parameters!',
         });
       } else {
-        let res = await db.District.findAll({
+        let res = await db.Ward.findAll({
           where: {
             districtId: data.districtId,
           },
