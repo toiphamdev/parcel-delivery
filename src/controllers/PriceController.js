@@ -48,8 +48,25 @@ const getWard = async (req, res) => {
   }
 };
 
+const billing = async (req, res) => {
+  try {
+    const data = await priceService.billingService(req.body);
+    if (!data) {
+      return res.status(200).json({
+        errCode: -1,
+        errMessage: 'Err from server',
+      });
+    } else {
+      return res.status(200).json(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getDistrict,
   getProvince,
   getWard,
+  billing,
 };
