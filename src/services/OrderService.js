@@ -807,7 +807,13 @@ const bulkCreateOrderService = (data) => {
           let provinceId = province.filter((pro) => {
             return pro.provinceName === data.provinceId;
           });
-          console.log(provinceId);
+          let districtId = province.filter((dis) => {
+            return dis.districtName === data.districtId;
+          });
+          let wardId = province.filter((ward) => {
+            return ward.wardName === data.wardId;
+          });
+
           return {
             senderEmail: item.senderEmail,
             fullName: item.fullName,
@@ -816,8 +822,8 @@ const bulkCreateOrderService = (data) => {
             orderCode: item.orderCode,
             statusId: item.statusId,
             date: item.date,
-            // wardId: ward.id,
-            // districtId: district.id,
+            wardId: ward[0].id,
+            districtId: district[0].id,
           };
         });
         console.log(convertOrderArr);
