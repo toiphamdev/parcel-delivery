@@ -805,7 +805,11 @@ const bulkCreateOrderService = (data) => {
         });
         let convertOrderArr = data.orderArr.map((item) => {
           let provinceId = province.filter((pro) => {
-            console.log(pro.provinceName);
+            console.log(
+              pro.provinceName === data.provinceId,
+              pro.provinceName,
+              data.provinceId
+            );
             return pro.provinceName === data.provinceId;
           });
           let districtId = district.filter((dis) => {
