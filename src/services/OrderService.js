@@ -1,6 +1,7 @@
 const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
 const Sequelize = require('sequelize');
+const priceService = require('../services/PriceService');
 const Op = Sequelize.Op;
 
 const createNewOrderService = (data) => {
@@ -803,15 +804,28 @@ const bulkCreateOrderService = (data) => {
         let ward = await db.Ward.findAll({
           attributes: ['id'],
         });
-        let convertOrderArr = data.orderArr.map((item) => {
+        let user = await db.findOne({
+          where: {
+            email: senderEmail,
+          },
+          attributes: ['provinceId'],
+        });
+        let convertOrderArr = data.orderArr.map(async (item) => {
           let provinceId = province.filter((pro) => {
             return pro.provinceName === data.provinceId;
           });
-          let districtId = province.filter((dis) => {
+          let districtId = district.filter((dis) => {
             return dis.districtName === data.districtId;
           });
-          let wardId = province.filter((ward) => {
+          let wardId = ward.filter((ward) => {
             return ward.wardName === data.wardId;
+          });
+          console.log('tinh', provinceId);
+          let price = await priceService.billingService({
+            toProvince: provinceId[0].id,
+            fromProvinceId: user.provinceId,
+            commodityValue: data.commodityValue,
+            weight: data.totalWeight,
           });
 
           return {
@@ -822,8 +836,14 @@ const bulkCreateOrderService = (data) => {
             orderCode: item.orderCode,
             statusId: item.statusId,
             date: item.date,
-            wardId: ward[0].id,
-            districtId: district[0].id,
+            wardId: wardId[0].id,
+            districtId: districtId[0].id,
+            phoneNumber: item.phoneNumber,
+            collectMoney: item.collectMoney,
+            freightPayer: item.freightPayer,
+            note: item.note,
+            price: price,
+            receiverEmail: item.receiverEmail,
           };
         });
         console.log(convertOrderArr);
