@@ -1,7 +1,6 @@
 const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
 const Sequelize = require('sequelize');
-const priceService = require('../services/PriceService');
 const Op = Sequelize.Op;
 
 const createNewOrderService = (data) => {
@@ -806,6 +805,7 @@ const bulkCreateOrderService = (data) => {
         });
         let convertOrderArr = data.orderArr.map((item) => {
           let provinceId = province.filter((pro) => {
+            console.log(pro.provinceName);
             return pro.provinceName === data.provinceId;
           });
           let districtId = district.filter((dis) => {
