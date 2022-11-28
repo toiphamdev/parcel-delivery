@@ -146,16 +146,16 @@ const billingService = (data) => {
           },
         });
 
-        let weight =
-          data.weight &&
-          (await convertWeight(
-            weight1.keyMap,
-            weight2.keyMap,
-            weight3.keyMap,
-            weight4.keyMap,
-            +data.weight
-          ));
-        console.log(weight1);
+        let weight = data.weight
+          ? await convertWeight(
+              weight1.keyMap,
+              weight2.keyMap,
+              weight3.keyMap,
+              weight4.keyMap,
+              +data.weight
+            )
+          : 0;
+
         if (res) {
           let priceService =
             (Number(data.comodityValue) *

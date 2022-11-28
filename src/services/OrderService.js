@@ -843,15 +843,15 @@ const bulkCreateOrderService = (data) => {
         });
 
         let convertOrderArr = data.orderArr.map((item) => {
-          let weight =
-            item.totalWeight &&
-            convertWeight(
-              weight1.keyMap,
-              weight2.keyMap,
-              weight3.keyMap,
-              weight4.keyMap,
-              +item.totalWeight
-            );
+          let weight = item.totalWeight
+            ? convertWeight(
+                weight1.keyMap,
+                weight2.keyMap,
+                weight3.keyMap,
+                weight4.keyMap,
+                +item.totalWeight
+              )
+            : 0;
           let provinceId = province.filter((pro) => {
             return pro.provinceName === item.provinceId;
           });
