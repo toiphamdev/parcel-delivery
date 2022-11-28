@@ -806,7 +806,7 @@ const bulkCreateOrderService = (data) => {
         });
         let user = await db.findOne({
           where: {
-            email: senderEmail,
+            email: data.senderEmail,
           },
           attributes: ['provinceId'],
         });
