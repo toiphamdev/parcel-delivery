@@ -794,6 +794,29 @@ const bulkCreateOrderService = (data) => {
           errMessage: 'Mising required parameters',
         });
       } else {
+        let convertOrderArr = data.orderArr.map(async (item) => {
+          let province = await db.Province.findOne({
+            where: {
+              provinceName: item.provinceId,
+            },
+          });
+          let district = await db.Province.findOne({
+            where: {
+              districtName: item.districtId,
+            },
+          });
+          let ward = await db.Province.findOne({
+            where: {
+              wardName: item.wardId,
+            },
+          });
+          return {
+            ...data.orderArr,
+            provinceId: province.id,
+            wardId: ward.id,
+            districtId: district.id,
+          };
+        });
         let order = await db.Order.bulkCreate(data.orderArr);
         let commodity = await db.Commodity.bulkCreate(data.commodityArr);
         if (order && commodity) {
