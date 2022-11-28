@@ -804,7 +804,7 @@ const bulkCreateOrderService = (data) => {
         let ward = await db.Ward.findAll({
           attributes: ['id'],
         });
-        let user = await db.findOne({
+        let user = await db.User.findOne({
           where: {
             email: data.senderEmail,
           },
