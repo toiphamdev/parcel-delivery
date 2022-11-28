@@ -800,12 +800,12 @@ const bulkCreateOrderService = (data) => {
               provinceName: item.provinceId,
             },
           });
-          let district = await db.Province.findOne({
+          let district = await db.District.findOne({
             where: {
               districtName: item.districtId,
             },
           });
-          let ward = await db.Province.findOne({
+          let ward = await db.Ward.findOne({
             where: {
               wardName: item.wardId,
             },
