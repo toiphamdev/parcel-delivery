@@ -810,6 +810,7 @@ const bulkCreateOrderService = (data) => {
               wardName: item.wardId,
             },
           });
+          console.log(ward);
           return {
             ...data.orderArr,
             provinceId: province.id,
