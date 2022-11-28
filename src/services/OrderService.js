@@ -810,13 +810,13 @@ const bulkCreateOrderService = (data) => {
               pro.provinceName,
               data.provinceId
             );
-            return pro.provinceName === data.provinceId;
+            return pro.provinceName === item.provinceId;
           });
           let districtId = district.filter((dis) => {
-            return dis.districtName === data.districtId;
+            return dis.districtName === item.districtId;
           });
           let wardId = ward.filter((ward) => {
-            return ward.wardName === data.wardId;
+            return ward.wardName === item.wardId;
           });
           console.log('tinh', provinceId);
 
