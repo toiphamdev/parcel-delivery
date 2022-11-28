@@ -865,7 +865,7 @@ const bulkCreateOrderService = (data) => {
           const bthPrice = data.bth === 'BTH' ? bth.percentagePrice : 0;
           const provincePrice = price.filter((pri) => {
             return (
-              pri.toProvinceId == item.toProvince &&
+              pri.toProvinceId == user.provinceId &&
               pri.fromProvinceId == item.fromProvinceId
             );
           });
