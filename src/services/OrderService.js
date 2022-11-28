@@ -867,8 +867,10 @@ const bulkCreateOrderService = (data) => {
             console.log(
               pri.toProvinceId == user.provinceId &&
                 pri.fromProvinceId == item.fromProvinceId,
-              pri.toProvinceId == user.provinceId,
-              pri.fromProvinceId == item.fromProvinceId
+              pri.toProvinceId,
+              user.provinceId,
+              pri.fromProvinceId,
+              item.fromProvinceId
             );
             return (
               pri.toProvinceId == user.provinceId &&
@@ -879,7 +881,7 @@ const bulkCreateOrderService = (data) => {
             Number(codPrice) * Number(item.commodityValue) +
             Number(bthPrice) * Number(item.commodityValue) +
             // Number(provincePrice[0].price) +
-            weight;
+            Number(weight);
 
           return {
             senderEmail: item.senderEmail,
