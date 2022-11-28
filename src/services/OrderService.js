@@ -861,7 +861,7 @@ const bulkCreateOrderService = (data) => {
           let wardId = ward.filter((ward) => {
             return ward.wardName === item.wardId;
           });
-          console.log(user);
+          console.log(user, weight, item.totalWeight);
           const codPrice = item.collectMoney > 0 ? cod.percentagePrice : 0;
           const bthPrice = data.bth === 'BTH' ? bth.percentagePrice : 0;
           const provincePrice = price.filter((pri) => {
