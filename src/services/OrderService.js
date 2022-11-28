@@ -864,15 +864,21 @@ const bulkCreateOrderService = (data) => {
           const codPrice = item.collectMoney > 0 ? cod.percentagePrice : 0;
           const bthPrice = data.bth === 'BTH' ? bth.percentagePrice : 0;
           const provincePrice = price.filter((pri) => {
+            console.log(
+              pri.toProvinceId == user.provinceId &&
+                pri.fromProvinceId == item.fromProvinceId,
+              pri.toProvinceId == user.provinceId,
+              pri.fromProvinceId == item.fromProvinceId
+            );
             return (
               pri.toProvinceId == user.provinceId &&
               pri.fromProvinceId == item.fromProvinceId
             );
           });
           const totalPrice =
-            Number(codPrice) +
-            Number(bthPrice) +
-            Number(provincePrice[0].price) +
+            Number(codPrice) * Number(item.commodityValue) +
+            Number(bthPrice) * Number(item.commodityValue) +
+            // Number(provincePrice[0].price) +
             weight;
 
           return {
