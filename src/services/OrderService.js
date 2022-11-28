@@ -844,7 +844,7 @@ const bulkCreateOrderService = (data) => {
 
         let convertOrderArr = data.orderArr.map((item) => {
           let weight =
-            data.weight &&
+            item.totalWeight &&
             convertWeight(
               weight1.keyMap,
               weight2.keyMap,
@@ -881,7 +881,7 @@ const bulkCreateOrderService = (data) => {
           const totalPrice =
             Number(codPrice) * Number(item.commodityValue) +
             Number(bthPrice) * Number(item.commodityValue) +
-            // Number(provincePrice[0].price) +
+            Number(provincePrice[0].price) +
             Number(weight);
 
           return {
