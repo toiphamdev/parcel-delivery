@@ -125,8 +125,37 @@ const billingService = (data) => {
             },
           }));
 
-        let weight = data.weight && (await convertWeight(+data.weight));
-        console.log(cod, bth);
+        let weight1 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT1',
+          },
+        });
+        let weight2 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT2',
+          },
+        });
+        let weight3 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT3',
+          },
+        });
+        let weight4 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT4',
+          },
+        });
+
+        let weight =
+          data.weight &&
+          (await convertWeight(
+            weight1.keyMap,
+            weight2.keyMap,
+            weight3.keyMap,
+            weight4.keyMap,
+            +data.weight
+          ));
+        console.log(weight1);
         if (res) {
           let priceService =
             (Number(data.comodityValue) *

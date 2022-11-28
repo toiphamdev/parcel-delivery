@@ -803,13 +803,56 @@ const bulkCreateOrderService = (data) => {
         let ward = await db.Ward.findAll({
           attributes: ['id', 'wardName'],
         });
+        let price = await db.Price.findAll({
+          attributes: ['toProvinceId', 'fromProvinceId', 'price'],
+        });
+        let cod = await db.Service.findOne({
+          where: {
+            keyMap: 'COD',
+          },
+        });
+        let bth = await db.Service.findOne({
+          where: {
+            keyMap: 'BTH',
+          },
+        });
+        let user = await db.User.findOne({
+          where: {
+            email: data.senderEmail,
+          },
+        });
+        let weight1 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT1',
+          },
+        });
+        let weight2 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT2',
+          },
+        });
+        let weight3 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT3',
+          },
+        });
+        let weight4 = await db.Allcode.findOne({
+          where: {
+            type: 'WEIGHT4',
+          },
+        });
+
         let convertOrderArr = data.orderArr.map((item) => {
-          let provinceId = province.filter((pro) => {
-            console.log(
-              pro.provinceName === data.provinceId,
-              pro.provinceName,
-              data.provinceId
+          let weight =
+            data.weight &&
+            convertWeight(
+              weight1.keyMap,
+              weight2.keyMap,
+              weight3.keyMap,
+              weight4.keyMap,
+              +item.totalWeight
             );
+          let provinceId = province.filter((pro) => {
             return pro.provinceName === item.provinceId;
           });
           let districtId = district.filter((dis) => {
@@ -818,7 +861,19 @@ const bulkCreateOrderService = (data) => {
           let wardId = ward.filter((ward) => {
             return ward.wardName === item.wardId;
           });
-          console.log('tinh', provinceId);
+          const codPrice = item.collectMoney > 0 ? cod.percentagePrice : 0;
+          const bthPrice = data.bth === 'BTH' ? bth.percentagePrice : 0;
+          const provincePrice = price.filter((pri) => {
+            return (
+              pri.toProvinceId == item.toProvince &&
+              pri.fromProvinceId == item.fromProvinceId
+            );
+          });
+          const totalPrice =
+            Number(codPrice) +
+            Number(bthPrice) +
+            Number(provincePrice[0].price) +
+            weight;
 
           return {
             senderEmail: item.senderEmail,
@@ -834,7 +889,7 @@ const bulkCreateOrderService = (data) => {
             collectMoney: item.collectMoney,
             freightPayer: item.freightPayer,
             note: item.note,
-            price: data.price,
+            price: totalPrice,
             receiverEmail: item.receiverEmail,
           };
         });
