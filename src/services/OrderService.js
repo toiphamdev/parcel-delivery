@@ -794,28 +794,24 @@ const bulkCreateOrderService = (data) => {
           errMessage: 'Mising required parameters',
         });
       } else {
-        let convertOrderArr = await data.orderArr.map(async (item) => {
-          let province = await db.Province.findOne({
-            where: {
-              provinceName: item.provinceId,
-            },
+        let province = await db.Province.findAll({
+          attributes: ['id'],
+        });
+        let district = await db.District.findAll({
+          attributes: ['id'],
+        });
+        let ward = await db.Ward.findAll({
+          attributes: ['id'],
+        });
+        let convertOrderArr = data.orderArr.map((item) => {
+          let provinceId = province.filter((pro) => {
+            return pro.provinceName === data.provinceId;
           });
-          let district = await db.District.findOne({
-            where: {
-              districtName: item.districtId,
-            },
-          });
-          let ward = await db.Ward.findOne({
-            where: {
-              wardName: item.wardId,
-            },
-          });
-          console.log(ward);
           return {
             ...data.orderArr,
-            provinceId: province.id,
-            wardId: ward.id,
-            districtId: district.id,
+            provinceId: provinceId.id,
+            // wardId: ward.id,
+            // districtId: district.id,
           };
         });
         console.log(convertOrderArr);
