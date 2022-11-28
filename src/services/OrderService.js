@@ -796,21 +796,15 @@ const bulkCreateOrderService = (data) => {
         });
       } else {
         let province = await db.Province.findAll({
-          attributes: ['id'],
+          attributes: ['id', 'provinceName'],
         });
         let district = await db.District.findAll({
-          attributes: ['id'],
+          attributes: ['id', 'districtName'],
         });
         let ward = await db.Ward.findAll({
-          attributes: ['id'],
+          attributes: ['id', 'wardName'],
         });
-        let user = await db.User.findOne({
-          where: {
-            email: data.senderEmail,
-          },
-          attributes: ['provinceId'],
-        });
-        let convertOrderArr = data.orderArr.map(async (item) => {
+        let convertOrderArr = data.orderArr.map((item) => {
           let provinceId = province.filter((pro) => {
             return pro.provinceName === data.provinceId;
           });
@@ -821,12 +815,6 @@ const bulkCreateOrderService = (data) => {
             return ward.wardName === data.wardId;
           });
           console.log('tinh', provinceId);
-          let price = await priceService.billingService({
-            toProvince: provinceId[0].id,
-            fromProvinceId: user.provinceId,
-            commodityValue: data.commodityValue,
-            weight: data.totalWeight,
-          });
 
           return {
             senderEmail: item.senderEmail,
@@ -842,7 +830,7 @@ const bulkCreateOrderService = (data) => {
             collectMoney: item.collectMoney,
             freightPayer: item.freightPayer,
             note: item.note,
-            price: price,
+            price: data.price,
             receiverEmail: item.receiverEmail,
           };
         });
