@@ -4,6 +4,7 @@ const _ = require('lodash');
 const db = require('../models');
 const { sendSimpleEmail } = require('./EmailService');
 const { generateRandomNumber } = require('../utils/genarateOTP');
+const { JSON } = require('sequelize');
 const salt = bcrypt.genSaltSync(10);
 
 const createNewUserService = (data) => {
@@ -65,8 +66,34 @@ const handleUserLoginService = (data) => {
             email: data.email,
           },
           attributes: {
-            exclude: ['accessToken', 'createdAt', 'updatedAt'],
+            exclude: [
+              'accessToken',
+              'createdAt',
+              'updatedAt',
+              'provinceId',
+              'districtId',
+              'wardId',
+            ],
           },
+          include: [
+            {
+              model: db.Province,
+              as: 'provinceData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.District,
+              as: 'districtData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Ward,
+              as: 'wardData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+          ],
+          raw: false,
+          nest: true,
         });
         if (!user) {
           resolve({
@@ -80,22 +107,22 @@ const handleUserLoginService = (data) => {
           });
         } else {
           const password = await bcrypt.compareSync(
-            data.password,
+            String(data.password),
             user.password
           );
           if (password) {
-            delete user.password;
-            let accessToken = createJWT(user.id, '48h');
-            await db.User.update(
-              {
-                isLogin: true,
-              },
-              {
-                where: {
-                  id: user.id,
-                },
-              }
-            );
+            delete user.dataValues.password;
+            let accessToken = createJWT({ id: user.id }, '48h');
+            // await db.User.update(
+            //   {
+            //     isLogin: true,
+            //   },
+            //   {
+            //     where: {
+            //       id: user.id,
+            //     },
+            //   }
+            // );
             resolve({
               errCode: 0,
               errMessage: 'User login success!',

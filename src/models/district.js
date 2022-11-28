@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      District.hasMany(models.User, {
+        foreignKey: 'districtId',
+        as: 'dictrictData',
+      });
+      District.hasMany(models.User, {
+        foreignKey: 'districtId',
+        as: 'dictrict',
+      });
     }
   }
   District.init(

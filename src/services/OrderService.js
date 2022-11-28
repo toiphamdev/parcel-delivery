@@ -302,6 +302,32 @@ const getOrderByStatusIdService = (data) => {
                   date: data.date,
                   statusId: data.statusId,
                 },
+                attributes: {
+                  exclude: [
+                    'wardId',
+                    'provinceId',
+                    'dítrictId',
+                    'createdAt',
+                    'updatedAt',
+                  ],
+                },
+                include: [
+                  {
+                    model: db.Province,
+                    as: 'provinceData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                  {
+                    model: db.District,
+                    as: 'districtData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                  {
+                    model: db.Ward,
+                    as: 'wardData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                ],
                 limit: size,
                 offset: (page - 1) * size,
                 nest: true,
@@ -338,6 +364,32 @@ const getOrderByStatusIdService = (data) => {
                 offset: (data.page - 1) * data.size,
                 nest: true,
                 raw: false,
+                attributes: {
+                  exclude: [
+                    'wardId',
+                    'provinceId',
+                    'dítrictId',
+                    'createdAt',
+                    'updatedAt',
+                  ],
+                },
+                include: [
+                  {
+                    model: db.Province,
+                    as: 'provinceData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                  {
+                    model: db.District,
+                    as: 'districtData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                  {
+                    model: db.Ward,
+                    as: 'wardData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                ],
               });
               if (order) {
                 resolve({
@@ -382,6 +434,32 @@ const getOrderByStatusService = (data) => {
           offset: (page - 1) * size,
           nest: true,
           raw: false,
+          attributes: {
+            exclude: [
+              'wardId',
+              'provinceId',
+              'dítrictId',
+              'createdAt',
+              'updatedAt',
+            ],
+          },
+          include: [
+            {
+              model: db.Province,
+              as: 'provinceData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.District,
+              as: 'districtData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Ward,
+              as: 'wardData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+          ],
         });
         if (order) {
           resolve({
@@ -479,6 +557,32 @@ const getOrderPostmanByStatusIdService = (data) => {
           offset: (page - 1) * size,
           nest: true,
           raw: false,
+          attributes: {
+            exclude: [
+              'wardId',
+              'provinceId',
+              'dítrictId',
+              'createdAt',
+              'updatedAt',
+            ],
+          },
+          include: [
+            {
+              model: db.Province,
+              as: 'provinceData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.District,
+              as: 'districtData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Ward,
+              as: 'wardData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+          ],
         });
         if (order) {
           resolve({
@@ -557,6 +661,32 @@ const getOrderByStorageIdService = (data) => {
           offset: (page - 1) * size,
           nest: true,
           raw: false,
+          attributes: {
+            exclude: [
+              'wardId',
+              'provinceId',
+              'dítrictId',
+              'createdAt',
+              'updatedAt',
+            ],
+          },
+          include: [
+            {
+              model: db.Province,
+              as: 'provinceData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.District,
+              as: 'districtData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Ward,
+              as: 'wardData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+          ],
         });
         if (order) {
           resolve({
@@ -609,6 +739,32 @@ const searchOrderByPostmanService = (data) => {
           offset: (page - 1) * size,
           nest: true,
           raw: false,
+          attributes: {
+            exclude: [
+              'wardId',
+              'provinceId',
+              'dítrictId',
+              'createdAt',
+              'updatedAt',
+            ],
+          },
+          include: [
+            {
+              model: db.Province,
+              as: 'provinceData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.District,
+              as: 'districtData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Ward,
+              as: 'wardData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+          ],
         });
         if (order) {
           resolve({
@@ -720,6 +876,32 @@ const getOrderByStatusIdSorageService = (data) => {
           offset: (page - 1) * size,
           nest: true,
           raw: false,
+          attributes: {
+            exclude: [
+              'wardId',
+              'provinceId',
+              'dítrictId',
+              'createdAt',
+              'updatedAt',
+            ],
+          },
+          include: [
+            {
+              model: db.Province,
+              as: 'provinceData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.District,
+              as: 'districtData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Ward,
+              as: 'wardData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+          ],
         });
         if (order) {
           resolve({

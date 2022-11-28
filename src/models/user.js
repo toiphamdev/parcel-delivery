@@ -13,6 +13,21 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userEmail',
         as: 'userData',
       });
+      User.belongsTo(models.Province, {
+        foreignKey: 'provinceId',
+        targetKey: 'id',
+        as: 'provinceData',
+      });
+      User.belongsTo(models.District, {
+        foreignKey: 'districtId',
+        targetKey: 'id',
+        as: 'districtData',
+      });
+      User.belongsTo(models.Ward, {
+        foreignKey: 'wardId',
+        targetKey: 'id',
+        as: 'wardData',
+      });
     }
   }
   User.init(

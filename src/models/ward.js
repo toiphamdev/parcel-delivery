@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ward.hasMany(models.User, {
+        foreignKey: 'wardId',
+        as: 'wardData',
+      });
+      Ward.hasMany(models.Order, {
+        foreignKey: 'wardId',
+        as: 'ward',
+      });
     }
   }
   Ward.init(
