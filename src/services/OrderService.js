@@ -1,8 +1,10 @@
 const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
 const Sequelize = require('sequelize');
+const { UUIDV4 } = require('sequelize');
 const Op = Sequelize.Op;
 const convertWeight = require('../utils/genarateOTP').covertWeigth;
+const { v4: uuidv4 } = require('uuid');
 
 const createNewOrderService = (data) => {
   return new Promise(async (resolve, reject) => {
@@ -32,6 +34,7 @@ const createNewOrderService = (data) => {
             errMessage: 'Order code is exist',
           });
         } else {
+          let orderKey = uuidv4();
           let order = await db.Order.create({
             senderEmail: data.senderEmail,
             fullName: data.fullName,
@@ -45,11 +48,13 @@ const createNewOrderService = (data) => {
             districtId: data.districtId,
             provinceId: data.provinceId,
             wardId: data.wardId,
+            keyId: orderKey,
           });
           let commodityArr = parseCommodityArr(
             data.commodities,
             data.orderCode,
-            data.senderEmail
+            data.senderEmail,
+            orderKey
           );
           let commodities = await db.Commodity.bulkCreate(commodityArr);
           if (order && commodities) {
@@ -875,6 +880,17 @@ const bulkCreateOrderService = (data) => {
             (Number(bthPrice) * Number(item.commodityValue)) / 100 +
             Number(provincePrice[0].price) +
             Number(weight);
+          let orderKey = uuidv4();
+          data.commodityArr = data.commodityArr.map((element) => {
+            if (item.orderCode === element.orderCode) {
+              return {
+                ...element,
+                orderKey: orderKey,
+              };
+            } else {
+              return element;
+            }
+          });
 
           return {
             senderEmail: item.senderEmail,
