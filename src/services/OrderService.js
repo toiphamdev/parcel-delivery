@@ -871,8 +871,8 @@ const bulkCreateOrderService = (data) => {
             );
           });
           const totalPrice =
-            Number(codPrice) * Number(item.commodityValue) +
-            Number(bthPrice) * Number(item.commodityValue) +
+            (Number(codPrice) * Number(item.commodityValue)) / 100 +
+            (Number(bthPrice) * Number(item.commodityValue)) / 100 +
             Number(provincePrice[0].price) +
             Number(weight);
 
@@ -894,7 +894,6 @@ const bulkCreateOrderService = (data) => {
             receiverEmail: item.receiverEmail,
           };
         });
-        console.log(convertOrderArr);
         let order = await db.Order.bulkCreate(convertOrderArr);
         let commodity = await db.Commodity.bulkCreate(data.commodityArr);
         if (order && commodity) {
