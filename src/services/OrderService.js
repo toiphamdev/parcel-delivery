@@ -843,7 +843,7 @@ const bulkCreateOrderService = (data) => {
           },
         });
 
-        let convertOrderArr = data.orderArr.map((item) => {
+        let convertOrderArr = await data.orderArr.map((item) => {
           let weight = item.totalWeight
             ? convertWeight(
                 weight1.keyMap,
