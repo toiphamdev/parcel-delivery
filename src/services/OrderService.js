@@ -861,16 +861,17 @@ const bulkCreateOrderService = (data) => {
           let wardId = ward.filter((ward) => {
             return ward.wardName === item.wardId;
           });
+          console.log(user);
           const codPrice = item.collectMoney > 0 ? cod.percentagePrice : 0;
           const bthPrice = data.bth === 'BTH' ? bth.percentagePrice : 0;
           const provincePrice = price.filter((pri) => {
             console.log(
               pri.toProvinceId == user.provinceId &&
-                pri.fromProvinceId == item.fromProvinceId,
+                pri.fromProvinceId == provinceId[0].id,
               pri.toProvinceId,
               user.provinceId,
               pri.fromProvinceId,
-              item.fromProvinceId
+              provinceId[0].id
             );
             return (
               pri.toProvinceId == user.provinceId &&
