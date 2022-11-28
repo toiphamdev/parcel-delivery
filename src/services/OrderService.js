@@ -2,6 +2,7 @@ const db = require('../models');
 const { parseCommodityArr } = require('../utils/parseCommodityArr');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const convertWeight = require('../utils/genarateOTP').covertWeigth;
 
 const createNewOrderService = (data) => {
   return new Promise(async (resolve, reject) => {
@@ -865,14 +866,6 @@ const bulkCreateOrderService = (data) => {
           const codPrice = item.collectMoney > 0 ? cod.percentagePrice : 0;
           const bthPrice = data.bth === 'BTH' ? bth.percentagePrice : 0;
           const provincePrice = price.filter((pri) => {
-            console.log(
-              pri.toProvinceId == user.provinceId &&
-                pri.fromProvinceId == provinceId[0].id,
-              pri.toProvinceId,
-              user.provinceId,
-              pri.fromProvinceId,
-              provinceId[0].id
-            );
             return (
               pri.toProvinceId == user.provinceId &&
               pri.fromProvinceId == item.fromProvinceId
