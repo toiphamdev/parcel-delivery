@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       Order.hasMany(models.Commodity, {
         foreignKey: 'orderKey',
+        sourceKey: 'keyId',
         as: 'commodityData',
       });
     }
@@ -53,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       provinceId: DataTypes.STRING,
       districtId: DataTypes.STRING,
       wardId: DataTypes.STRING,
-      keyMap: DataTypes.STRING,
+      keyId: DataTypes.STRING,
     },
     {
       sequelize,

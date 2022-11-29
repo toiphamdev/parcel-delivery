@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Commodity.belongsTo(models.Order, {
+        targetKey: 'keyId',
+        // sourceKey: 'orderKey',
         foreignKey: 'orderKey',
-        targetKey: 'keyMap',
         as: 'commodityData',
       });
     }
