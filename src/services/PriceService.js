@@ -95,11 +95,11 @@ const billingService = (data) => {
       if (
         !data.toProvinceId ||
         !data.fromProvinceId ||
-        !data.comodityValue ||
+        !data.commodityValue ||
         !data.weight
       ) {
         resolve({
-          errCode: 0,
+          errCode: 1,
           errMessage: 'Missing required parameters',
         });
       } else {
