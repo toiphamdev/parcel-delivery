@@ -12,11 +12,7 @@ let initWebRoutes = (app) => {
   router.post('/api/create-new-user', userController.createNewUser);
   router.post('/api/login', userController.handleUserLogin);
   router.post('/api/logout', userController.handleUserLogout);
-  router.post(
-    '/api/update-user-info',
-    accessMidleware,
-    userController.updateUserInfo
-  );
+  router.post('/api/update-user-info', userController.updateUserInfo);
   router.get('/api/get-user-by-role', userController.getUserByRoleId);
 
   router.get('/api/get-user-by-email', userController.getUserById);
