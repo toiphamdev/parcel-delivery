@@ -47,6 +47,7 @@ const createNewOrderService = (data) => {
             price: data.price,
             districtId: data.districtId,
             provinceId: data.provinceId,
+            freightPayer: data.freightPayer,
             wardId: data.wardId,
             keyId: orderKey,
           });
