@@ -333,6 +333,11 @@ const getOrderByStatusIdService = (data) => {
                     as: 'ward',
                     attributes: { exclude: ['createdAt', 'updatedAt'] },
                   },
+                  {
+                    model: db.Commodity,
+                    as: 'commodityData',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
                 ],
                 limit: size,
                 offset: (page - 1) * size,
@@ -393,6 +398,11 @@ const getOrderByStatusIdService = (data) => {
                   {
                     model: db.Ward,
                     as: 'ward',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                  {
+                    model: db.Commodity,
+                    as: 'commodityData',
                     attributes: { exclude: ['createdAt', 'updatedAt'] },
                   },
                 ],
@@ -463,6 +473,11 @@ const getOrderByStatusService = (data) => {
             {
               model: db.Ward,
               as: 'ward',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Commodity,
+              as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
           ],
@@ -588,6 +603,11 @@ const getOrderPostmanByStatusIdService = (data) => {
               as: 'ward',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
+            {
+              model: db.Commodity,
+              as: 'commodityData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
           ],
         });
         if (order) {
@@ -692,6 +712,11 @@ const getOrderByStorageIdService = (data) => {
               as: 'ward',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
+            {
+              model: db.Commodity,
+              as: 'commodityData',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
           ],
         });
         if (order) {
@@ -768,6 +793,11 @@ const searchOrderByPostmanService = (data) => {
             {
               model: db.Ward,
               as: 'ward',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Commodity,
+              as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
           ],
@@ -1016,6 +1046,11 @@ const getOrderByStatusIdSorageService = (data) => {
             {
               model: db.Ward,
               as: 'ward',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.Commodity,
+              as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
           ],
