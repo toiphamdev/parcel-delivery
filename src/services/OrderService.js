@@ -908,7 +908,7 @@ const bulkCreateOrderService = (data) => {
             note: item.note,
             price: totalPrice,
             receiverEmail: item.receiverEmail,
-            orderKey: orderKey,
+            keyId: orderKey,
           };
         });
         let order = await db.Order.bulkCreate(convertOrderArr);
