@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Commodity.belongsTo(models.Order, {
         foreignKey: 'orderKey',
-        targetKey: 'keyId',
+        targetKey: 'keyMap',
         as: 'commodityData',
       });
     }
