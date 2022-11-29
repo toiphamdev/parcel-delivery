@@ -158,13 +158,13 @@ const billingService = (data) => {
 
         if (res) {
           let priceService =
-            (Number(data.collectMoney) *
+            (Number(data.collectMoney ? data.collectMoney : 0) *
               Number(cod ? cod.percentagePrice : 0)) /
               100 +
-            (Number(data.comodityValue) *
+            (Number(data.comodityValue ? data.commodityValue : 0) *
               Number(bth ? bth.percentagePrice : 0)) /
               100;
-          console.log(priceService);
+          console.log(priceService, data.collectMoney, data.commodityValue);
 
           resolve({
             errCode: 0,
@@ -173,7 +173,9 @@ const billingService = (data) => {
             priceService: priceService ? priceService : 0,
             priceWeigth: weight ? weight : 0,
             totalPrice:
-              Number(res.price) + priceService + Number(weight ? weight : 0),
+              Number(res.price) +
+              Number(priceService ? priceService : 0) +
+              Number(weight ? weight : 0),
           });
         } else {
           resolve({
