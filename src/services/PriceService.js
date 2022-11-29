@@ -158,7 +158,7 @@ const billingService = (data) => {
 
         if (res) {
           let priceService =
-            (Number(data.comodityValue) *
+            (Number(data.collectMoney) *
               Number(cod ? cod.percentagePrice : 0)) /
               100 +
             (Number(data.comodityValue) *

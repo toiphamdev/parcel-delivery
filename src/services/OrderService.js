@@ -907,7 +907,7 @@ const bulkCreateOrderService = (data) => {
             );
           });
           const totalPrice =
-            (Number(codPrice) * Number(item.commodityValue)) / 100 +
+            (Number(codPrice) * Number(item.collectMoney)) / 100 +
             (Number(bthPrice) * Number(item.commodityValue)) / 100 +
             Number(provincePrice[0].price) +
             Number(weight);
