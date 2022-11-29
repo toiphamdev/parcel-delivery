@@ -170,7 +170,7 @@ const billingService = (data) => {
             errCode: 0,
             errMessage: 'Price success!',
             priceProvince: Number(res.price),
-            priceService: priceService,
+            priceService: priceService ? priceService : 0,
             priceWeigth: weight ? weight : 0,
             totalPrice:
               Number(res.price) + priceService + Number(weight ? weight : 0),
