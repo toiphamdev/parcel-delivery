@@ -318,21 +318,21 @@ const getOrderByStatusIdService = (data) => {
                   ],
                 },
                 include: [
-                  {
-                    model: db.Province,
-                    as: 'province',
-                    attributes: { exclude: ['createdAt', 'updatedAt'] },
-                  },
-                  {
-                    model: db.District,
-                    as: 'district',
-                    attributes: { exclude: ['createdAt', 'updatedAt'] },
-                  },
-                  {
-                    model: db.Ward,
-                    as: 'ward',
-                    attributes: { exclude: ['createdAt', 'updatedAt'] },
-                  },
+                  // {
+                  //   model: db.Province,
+                  //   as: 'province',
+                  //   attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  // },
+                  // {
+                  //   model: db.District,
+                  //   as: 'district',
+                  //   attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  // },
+                  // {
+                  //   model: db.Ward,
+                  //   as: 'ward',
+                  //   attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  // },
                   {
                     model: db.Commodity,
                     as: 'commodityData',
