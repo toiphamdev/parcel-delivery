@@ -938,6 +938,7 @@ const bulkCreateOrderService = (data) => {
             note: item.note,
             price: totalPrice,
             receiverEmail: item.receiverEmail,
+            freightPayer: item.freightPayer,
             keyId: orderKey,
           };
         });
