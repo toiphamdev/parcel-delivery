@@ -105,8 +105,8 @@ const billingService = (data) => {
       } else {
         let res = await db.Price.findOne({
           where: {
-            fromProvinceId: data.fromProvinceId,
-            toProvinceId: data.toProvinceId,
+            fromProvinceId: +data.fromProvinceId,
+            toProvinceId: +data.toProvinceId,
           },
         });
         let cod =
