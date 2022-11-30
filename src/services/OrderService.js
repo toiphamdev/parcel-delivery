@@ -339,6 +339,41 @@ const getOrderByStatusIdService = (data) => {
                     as: 'commodityData',
                     attributes: { exclude: ['createdAt', 'updatedAt'] },
                   },
+                  {
+                    model: db.User,
+                    as: 'senderData',
+                    attributes: {
+                      exclude: [
+                        'roleId',
+                        'service',
+                        'storageId',
+                        'districtId',
+                        'provinceId',
+                        'idTax',
+                        'permanentAddress',
+                        'wardId',
+                        'createdAt',
+                        'updatedAt',
+                      ],
+                    },
+                    include: [
+                      {
+                        model: db.Province,
+                        as: 'provinceData',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] },
+                      },
+                      {
+                        model: db.District,
+                        as: 'districtData',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] },
+                      },
+                      {
+                        model: db.Ward,
+                        as: 'wardData',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] },
+                      },
+                    ],
+                  },
                 ],
                 limit: size,
                 offset: (page - 1) * size,
@@ -405,6 +440,41 @@ const getOrderByStatusIdService = (data) => {
                     model: db.Commodity,
                     as: 'commodityData',
                     attributes: { exclude: ['createdAt', 'updatedAt'] },
+                  },
+                  {
+                    model: db.User,
+                    as: 'senderData',
+                    attributes: {
+                      exclude: [
+                        'roleId',
+                        'service',
+                        'storageId',
+                        'districtId',
+                        'provinceId',
+                        'idTax',
+                        'permanentAddress',
+                        'wardId',
+                        'createdAt',
+                        'updatedAt',
+                      ],
+                    },
+                    include: [
+                      {
+                        model: db.Province,
+                        as: 'provinceData',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] },
+                      },
+                      {
+                        model: db.District,
+                        as: 'districtData',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] },
+                      },
+                      {
+                        model: db.Ward,
+                        as: 'wardData',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] },
+                      },
+                    ],
                   },
                 ],
               });
@@ -480,6 +550,41 @@ const getOrderByStatusService = (data) => {
               model: db.Commodity,
               as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.User,
+              as: 'senderData',
+              attributes: {
+                exclude: [
+                  'roleId',
+                  'service',
+                  'storageId',
+                  'districtId',
+                  'provinceId',
+                  'idTax',
+                  'permanentAddress',
+                  'wardId',
+                  'createdAt',
+                  'updatedAt',
+                ],
+              },
+              include: [
+                {
+                  model: db.Province,
+                  as: 'provinceData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.District,
+                  as: 'districtData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.Ward,
+                  as: 'wardData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+              ],
             },
           ],
         });
@@ -609,6 +714,41 @@ const getOrderPostmanByStatusIdService = (data) => {
               as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
+            {
+              model: db.User,
+              as: 'senderData',
+              attributes: {
+                exclude: [
+                  'roleId',
+                  'service',
+                  'storageId',
+                  'districtId',
+                  'provinceId',
+                  'idTax',
+                  'permanentAddress',
+                  'wardId',
+                  'createdAt',
+                  'updatedAt',
+                ],
+              },
+              include: [
+                {
+                  model: db.Province,
+                  as: 'provinceData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.District,
+                  as: 'districtData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.Ward,
+                  as: 'wardData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+              ],
+            },
           ],
         });
         if (order) {
@@ -718,6 +858,41 @@ const getOrderByStorageIdService = (data) => {
               as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
+            {
+              model: db.User,
+              as: 'senderData',
+              attributes: {
+                exclude: [
+                  'roleId',
+                  'service',
+                  'storageId',
+                  'districtId',
+                  'provinceId',
+                  'idTax',
+                  'permanentAddress',
+                  'wardId',
+                  'createdAt',
+                  'updatedAt',
+                ],
+              },
+              include: [
+                {
+                  model: db.Province,
+                  as: 'provinceData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.District,
+                  as: 'districtData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.Ward,
+                  as: 'wardData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+              ],
+            },
           ],
         });
         if (order) {
@@ -800,6 +975,41 @@ const searchOrderByPostmanService = (data) => {
               model: db.Commodity,
               as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.User,
+              as: 'senderData',
+              attributes: {
+                exclude: [
+                  'roleId',
+                  'service',
+                  'storageId',
+                  'districtId',
+                  'provinceId',
+                  'idTax',
+                  'permanentAddress',
+                  'wardId',
+                  'createdAt',
+                  'updatedAt',
+                ],
+              },
+              include: [
+                {
+                  model: db.Province,
+                  as: 'provinceData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.District,
+                  as: 'districtData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.Ward,
+                  as: 'wardData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+              ],
             },
           ],
         });
@@ -1054,6 +1264,41 @@ const getOrderByStatusIdSorageService = (data) => {
               model: db.Commodity,
               as: 'commodityData',
               attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            {
+              model: db.User,
+              as: 'senderData',
+              attributes: {
+                exclude: [
+                  'roleId',
+                  'service',
+                  'storageId',
+                  'districtId',
+                  'provinceId',
+                  'idTax',
+                  'permanentAddress',
+                  'wardId',
+                  'createdAt',
+                  'updatedAt',
+                ],
+              },
+              include: [
+                {
+                  model: db.Province,
+                  as: 'provinceData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.District,
+                  as: 'districtData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+                {
+                  model: db.Ward,
+                  as: 'wardData',
+                  attributes: { exclude: ['createdAt', 'updatedAt'] },
+                },
+              ],
             },
           ],
         });

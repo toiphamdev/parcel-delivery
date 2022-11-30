@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         as: 'wardData',
       });
+      User.belongsTo(models.Order, {
+        foreignKey: 'email',
+        targetKey: 'senderEmail',
+        as: 'senderData',
+      });
     }
   }
   User.init(

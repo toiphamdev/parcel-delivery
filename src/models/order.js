@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'keyId',
         as: 'commodityData',
       });
+      Order.hasOne(models.User, {
+        foreignKey: 'email',
+        sourceKey: 'senderEmail',
+        as: 'senderData',
+      });
     }
   }
   Order.init(
