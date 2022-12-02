@@ -344,6 +344,7 @@ const getOrderByStatusIdService = (data) => {
                     as: 'senderData',
                     attributes: {
                       exclude: [
+                        'password',
                         'roleId',
                         'service',
                         'storageId',
@@ -446,6 +447,7 @@ const getOrderByStatusIdService = (data) => {
                     as: 'senderData',
                     attributes: {
                       exclude: [
+                        'password',
                         'roleId',
                         'service',
                         'storageId',
@@ -556,6 +558,7 @@ const getOrderByStatusService = (data) => {
               as: 'senderData',
               attributes: {
                 exclude: [
+                  'password',
                   'roleId',
                   'service',
                   'storageId',
@@ -720,6 +723,7 @@ const getOrderPostmanByStatusIdService = (data) => {
               attributes: {
                 exclude: [
                   'roleId',
+                  'password',
                   'service',
                   'storageId',
                   'districtId',
@@ -863,6 +867,7 @@ const getOrderByStorageIdService = (data) => {
               as: 'senderData',
               attributes: {
                 exclude: [
+                  'password',
                   'roleId',
                   'service',
                   'storageId',
@@ -981,6 +986,7 @@ const searchOrderByPostmanService = (data) => {
               as: 'senderData',
               attributes: {
                 exclude: [
+                  'password',
                   'roleId',
                   'service',
                   'storageId',
@@ -1270,6 +1276,7 @@ const getOrderByStatusIdSorageService = (data) => {
               as: 'senderData',
               attributes: {
                 exclude: [
+                  'password',
                   'roleId',
                   'service',
                   'storageId',
