@@ -1153,7 +1153,7 @@ const bulkCreateOrderService = (data) => {
             collectMoney: item.collectMoney,
             freightPayer: item.freightPayer,
             note: item.note,
-            price: totalPrice,
+            price: Math.floor(totalPrice),
             receiverEmail: item.receiverEmail,
             freightPayer: item.freightPayer,
             keyId: orderKey,
